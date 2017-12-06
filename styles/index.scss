@@ -1,0 +1,56 @@
+/*// Code inspired by
+// https://codepen.io/dlouise/pen/NPZMjo
+// Dana Iti*/
+.content {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+.heading{
+  display: block;
+}
+.grid {
+  flex: 5;
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAGUlEQVQYV2NkIBIwEqmOYVQh3pAiNnj+AwALaAEKfsPrZgAAAABJRU5ErkJggg==);
+  background-position: 18px 11px;
+  height: 80vh;
+}
+
+.sidebar{
+  flex: 1;
+  color: green;
+}
+.sidebar img {
+  height: 50px;
+  width: 50px;
+}
+
+.box {
+  margin: 0 auto;
+  margin-top: 50px;
+  width: 301px;
+  height: 101px;
+  background-color: #54cfb3;
+  padding-top: 70px;
+}
+
+.text {
+  margin-top: 0;
+  color: #fff;
+  text-align: center;
+  font-size: 28px;
+  letter-spacing: 1px;
+}
+
+.opac {
+  opacity: .8;
+}
+
+.move-cursor {
+  cursor: move;
+}
+
+.grab-cursor {
+  cursor: grab;
+  cursor: -webkit-grab;
+}

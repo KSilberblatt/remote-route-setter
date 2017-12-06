@@ -1,0 +1,31 @@
+{
+  "name": "remote-route-setter",
+  "version": "1.0.0",
+  "description": "## Background and Overview",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack",
+    "watch": "webpack --watch"
+  },
+  "dependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-es2015": "^6.24.1",
+    "css-loader": "^0.28.7",
+    "node-sass": "^4.7.2",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.19.0",
+    "webpack": "^3.8.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KSilberblatt/remote-route-setter.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KSilberblatt/remote-route-setter/issues"
+  },
+  "homepage": "https://github.com/KSilberblatt/remote-route-setter#readme"
+}
