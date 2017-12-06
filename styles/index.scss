@@ -1,6 +1,7 @@
 /*// Code inspired by
 // https://codepen.io/dlouise/pen/NPZMjo
 // Dana Iti*/
+
 .content {
   display: flex;
   flex-direction: row;
@@ -15,11 +16,15 @@
   height: 50px;
   width: 50px;
 }
+.heading img:hover {
+  cursor: pointer;
+}
 .grid {
   flex: 5;
   background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAGUlEQVQYV2NkIBIwEqmOYVQh3pAiNnj+AwALaAEKfsPrZgAAAABJRU5ErkJggg==);
   background-position: 18px 11px;
   height: 80vh;
+
 }
 
 .sidebar{
@@ -31,6 +36,9 @@
   height: 50px;
   width: 50px;
 
+}
+.sidebar img:hover {
+  cursor: pointer;
 }
 
 .heading {
@@ -67,4 +75,7 @@
 .grab-cursor {
   cursor: grab;
   cursor: -webkit-grab;
+}
+.delete-cursor{
+  cursor: no-drop;
 }

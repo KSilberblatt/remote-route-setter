@@ -71,6 +71,7 @@ __webpack_require__(1);
 __webpack_require__(6);
 document.addEventListener("DOMContentLoaded", () => {
   let gridSize = 50;
+  let deleteMode = false;
 
   $(" .box ")
     .draggable({ grid: [ gridSize, gridSize ] })
@@ -108,6 +109,17 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       $(" .box ").addClass("box");
       $(" .box ").addClass(e.target.id);
+    });
+
+    $('#delete').click(() => {
+      if (deleteMode) {
+        $(' .grid ').removeClass("delete-cursor");
+        deleteMode = !deleteMode;
+      }
+      else {
+        deleteMode = !deleteMode;
+        $(' .grid ').addClass("delete-cursor");
+      }
     });
 
     let rotation = 5;
@@ -208,7 +220,7 @@ exports = module.exports = __webpack_require__(3)(undefined);
 
 
 // module
-exports.push([module.i, "/*// Code inspired by\n// https://codepen.io/dlouise/pen/NPZMjo\n// Dana Iti*/\n.content {\n  display: flex;\n  flex-direction: row;\n  height: 100%; }\n\n.heading {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between; }\n\n.heading img {\n  height: 50px;\n  width: 50px; }\n\n.grid {\n  flex: 5;\n  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAGUlEQVQYV2NkIBIwEqmOYVQh3pAiNnj+AwALaAEKfsPrZgAAAABJRU5ErkJggg==);\n  background-position: 18px 11px;\n  height: 80vh; }\n\n.sidebar {\n  flex: 1;\n  color: green;\n  background: black; }\n\n.sidebar img {\n  height: 50px;\n  width: 50px; }\n\n.heading {\n  background: black;\n  color: green;\n  margin: 0;\n  padding: 20px 10px; }\n\n.box {\n  margin: 0 auto;\n  margin-top: 50px;\n  width: 50px;\n  height: 50px; }\n\n.text {\n  margin-top: 0;\n  color: #fff;\n  text-align: center;\n  font-size: 28px;\n  letter-spacing: 1px; }\n\n.opac {\n  opacity: .8; }\n\n.move-cursor {\n  cursor: move; }\n\n.grab-cursor {\n  cursor: grab;\n  cursor: -webkit-grab; }\n", ""]);
+exports.push([module.i, "/*// Code inspired by\n// https://codepen.io/dlouise/pen/NPZMjo\n// Dana Iti*/\n.content {\n  display: flex;\n  flex-direction: row;\n  height: 100%; }\n\n.heading {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between; }\n\n.heading img {\n  height: 50px;\n  width: 50px; }\n\n.heading img:hover {\n  cursor: pointer; }\n\n.grid {\n  flex: 5;\n  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAGUlEQVQYV2NkIBIwEqmOYVQh3pAiNnj+AwALaAEKfsPrZgAAAABJRU5ErkJggg==);\n  background-position: 18px 11px;\n  height: 80vh; }\n\n.sidebar {\n  flex: 1;\n  color: green;\n  background: black; }\n\n.sidebar img {\n  height: 50px;\n  width: 50px; }\n\n.sidebar img:hover {\n  cursor: pointer; }\n\n.heading {\n  background: black;\n  color: green;\n  margin: 0;\n  padding: 20px 10px; }\n\n.box {\n  margin: 0 auto;\n  margin-top: 50px;\n  width: 50px;\n  height: 50px; }\n\n.text {\n  margin-top: 0;\n  color: #fff;\n  text-align: center;\n  font-size: 28px;\n  letter-spacing: 1px; }\n\n.opac {\n  opacity: .8; }\n\n.move-cursor {\n  cursor: move; }\n\n.grab-cursor {\n  cursor: grab;\n  cursor: -webkit-grab; }\n\n.delete-cursor {\n  cursor: no-drop; }\n", ""]);
 
 // exports
 
