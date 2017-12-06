@@ -68,6 +68,7 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(1);
+__webpack_require__(6);
 document.addEventListener("DOMContentLoaded", () => {
   let gridSize = 50;
 
@@ -94,6 +95,75 @@ document.addEventListener("DOMContentLoaded", () => {
         .removeClass("opac")
         .addClass("move-cursor");
   	});
+
+    $(" .hold ").on("click",  (e) => {
+      let element = $(" .box ")[0];
+      let classList = element.classList;
+      for (let i = 0; i < classList.length; i++){
+        if (classList.item(i) !== "box"
+        && classList.item(i) !== "ui-draggable"
+        && classList.item(i) !== "ui-draggable-handle"){
+          classList.remove(classList.item(i));
+        }
+      }
+      $(" .box ").addClass("box");
+      $(" .box ").addClass(e.target.id);
+    });
+
+    let rotation = 5;
+    jQuery.fn.rotate =(degrees) => {
+        $(" .box ").css({'transform' : 'rotate('+ degrees +'deg)'});
+        return $(this);
+    };
+    $('.rotate').click(() => {
+        rotation += 5;
+        $(" .box ").rotate(rotation);
+    });
+    $('.crotate').click(() => {
+        rotation -= 5;
+        $(" .box ").rotate(rotation);
+    });
+    $('.rotate').on("mousedown", () => {
+        rotation += 5;
+        $(" .box ").rotate(rotation);
+    });
+
+    let interval;
+    $("#crotate")[0].addEventListener('mousedown', function(e) {
+      interval = setInterval(function() {
+        rotation -= 5;
+        $(" .box ").rotate(rotation);
+      }, 50);
+    });
+
+    $("#crotate ")[0].addEventListener('mouseup',function(e) {
+      clearInterval(interval);
+    });
+
+    $("#crotate")[0].addEventListener('mouseout',function(e) {
+      clearInterval(interval);
+    });
+    $("#rotate")[0].addEventListener('mousedown', function(e) {
+      interval = setInterval(function() {
+        rotation += 5;
+        $(" .box ").rotate(rotation);
+      }, 50);
+    });
+
+    $("#rotate ")[0].addEventListener('mouseup',function(e) {
+      clearInterval(interval);
+    });
+
+    $("#rotate")[0].addEventListener('mouseout',function(e) {
+      clearInterval(interval);
+    });
+
+    $(" .counterclockwise ").on("click", () => {
+      $(" .box ").rotate(rotation);
+    });
+    $(" .clockwise ").on("click", () => {
+      $(" .box ").rotate(rotation);
+    });
 
 });
 
@@ -138,7 +208,7 @@ exports = module.exports = __webpack_require__(3)(undefined);
 
 
 // module
-exports.push([module.i, "/*// Code inspired by\n// https://codepen.io/dlouise/pen/NPZMjo\n// Dana Iti*/\n.content {\n  display: flex;\n  flex-direction: row;\n  height: 100%; }\n\n.heading {\n  display: block; }\n\n.grid {\n  flex: 5;\n  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAGUlEQVQYV2NkIBIwEqmOYVQh3pAiNnj+AwALaAEKfsPrZgAAAABJRU5ErkJggg==);\n  background-position: 18px 11px;\n  height: 80vh; }\n\n.sidebar {\n  flex: 1;\n  color: green;\n  background: black; }\n\n.sidebar img {\n  height: 50px;\n  width: 50px; }\n\n.heading {\n  background: black;\n  color: green;\n  margin: 0;\n  padding: 20px 10px; }\n\n.box {\n  margin: 0 auto;\n  margin-top: 50px;\n  width: 50px;\n  height: 50px;\n  content: url(\"https://i.imgur.com/o1OlWwm.png\"); }\n\n.text {\n  margin-top: 0;\n  color: #fff;\n  text-align: center;\n  font-size: 28px;\n  letter-spacing: 1px; }\n\n.opac {\n  opacity: .8; }\n\n.move-cursor {\n  cursor: move; }\n\n.grab-cursor {\n  cursor: grab;\n  cursor: -webkit-grab; }\n", ""]);
+exports.push([module.i, "/*// Code inspired by\n// https://codepen.io/dlouise/pen/NPZMjo\n// Dana Iti*/\n.content {\n  display: flex;\n  flex-direction: row;\n  height: 100%; }\n\n.heading {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between; }\n\n.heading img {\n  height: 50px;\n  width: 50px; }\n\n.grid {\n  flex: 5;\n  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAGUlEQVQYV2NkIBIwEqmOYVQh3pAiNnj+AwALaAEKfsPrZgAAAABJRU5ErkJggg==);\n  background-position: 18px 11px;\n  height: 80vh; }\n\n.sidebar {\n  flex: 1;\n  color: green;\n  background: black; }\n\n.sidebar img {\n  height: 50px;\n  width: 50px; }\n\n.heading {\n  background: black;\n  color: green;\n  margin: 0;\n  padding: 20px 10px; }\n\n.box {\n  margin: 0 auto;\n  margin-top: 50px;\n  width: 50px;\n  height: 50px; }\n\n.text {\n  margin-top: 0;\n  color: #fff;\n  text-align: center;\n  font-size: 28px;\n  letter-spacing: 1px; }\n\n.opac {\n  opacity: .8; }\n\n.move-cursor {\n  cursor: move; }\n\n.grab-cursor {\n  cursor: grab;\n  cursor: -webkit-grab; }\n", ""]);
 
 // exports
 
@@ -690,6 +760,51 @@ module.exports = function (css) {
 	// send back the fixed css
 	return fixedCss;
 };
+
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(7);
+if(typeof content === 'string') content = [[module.i, content, '']];
+// Prepare cssTransformation
+var transform;
+
+var options = {"hmr":true}
+options.transform = transform
+// add the styles to the DOM
+var update = __webpack_require__(4)(content, options);
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(false) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("!!../node_modules/css-loader/index.js!../node_modules/sass-loader/lib/loader.js!./holds.scss", function() {
+			var newContent = require("!!../node_modules/css-loader/index.js!../node_modules/sass-loader/lib/loader.js!./holds.scss");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(3)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, ".hand1 {\n  margin: 0 auto;\n  margin-top: 50px;\n  width: 50px;\n  height: 50px;\n  content: url(\"https://i.imgur.com/MzqxIK4.png\"); }\n\n.hand2 {\n  margin: 0 auto;\n  margin-top: 50px;\n  width: 50px;\n  height: 50px;\n  content: url(\"https://i.imgur.com/C6EXmSl.png\"); }\n\n.hand3 {\n  margin: 0 auto;\n  margin-top: 50px;\n  width: 50px;\n  height: 50px;\n  content: url(\"https://i.imgur.com/o1OlWwm.png\"); }\n\n.foot1 {\n  margin: 0 auto;\n  margin-top: 50px;\n  width: 50px;\n  height: 50px;\n  content: url(\"https://i.imgur.com/CmtJTtQ.png\"); }\n", ""]);
+
+// exports
 
 
 /***/ })

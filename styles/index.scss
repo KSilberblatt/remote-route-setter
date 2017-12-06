@@ -7,7 +7,13 @@
   height: 100%;
 }
 .heading{
-  display: block;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.heading img {
+  height: 50px;
+  width: 50px;
 }
 .grid {
   flex: 5;
@@ -39,7 +45,7 @@
   margin-top: 50px;
   width: 50px;
   height: 50px;
-  content:url("https://i.imgur.com/o1OlWwm.png");
+
 }
 
 .text {
