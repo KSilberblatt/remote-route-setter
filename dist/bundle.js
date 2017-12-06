@@ -69,12 +69,10 @@
 
 __webpack_require__(1);
 document.addEventListener("DOMContentLoaded", () => {
-  let grid_size = 10;
+  let gridSize = 50;
 
   $(" .box ")
-    .draggable({ grid: [ grid_size, grid_size ] })
-
-    .resizable({ grid: grid_size * 2 })
+    .draggable({ grid: [ gridSize, gridSize ] })
 
   	.on("mouseover", function(){
     	$( this ).addClass("move-cursor")
@@ -140,7 +138,7 @@ exports = module.exports = __webpack_require__(3)(undefined);
 
 
 // module
-exports.push([module.i, "/*// Code inspired by\n// https://codepen.io/dlouise/pen/NPZMjo\n// Dana Iti*/\n.content {\n  display: flex;\n  flex-direction: row;\n  height: 100%; }\n\n.heading {\n  display: block; }\n\n.grid {\n  flex: 5;\n  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAGUlEQVQYV2NkIBIwEqmOYVQh3pAiNnj+AwALaAEKfsPrZgAAAABJRU5ErkJggg==);\n  background-position: 18px 11px;\n  height: 80vh; }\n\n.sidebar {\n  flex: 1;\n  color: green; }\n\n.sidebar img {\n  height: 50px;\n  width: 50px; }\n\n.box {\n  margin: 0 auto;\n  margin-top: 50px;\n  width: 301px;\n  height: 101px;\n  background-color: #54cfb3;\n  padding-top: 70px; }\n\n.text {\n  margin-top: 0;\n  color: #fff;\n  text-align: center;\n  font-size: 28px;\n  letter-spacing: 1px; }\n\n.opac {\n  opacity: .8; }\n\n.move-cursor {\n  cursor: move; }\n\n.grab-cursor {\n  cursor: grab;\n  cursor: -webkit-grab; }\n", ""]);
+exports.push([module.i, "/*// Code inspired by\n// https://codepen.io/dlouise/pen/NPZMjo\n// Dana Iti*/\n.content {\n  display: flex;\n  flex-direction: row;\n  height: 100%; }\n\n.heading {\n  display: block; }\n\n.grid {\n  flex: 5;\n  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAGUlEQVQYV2NkIBIwEqmOYVQh3pAiNnj+AwALaAEKfsPrZgAAAABJRU5ErkJggg==);\n  background-position: 18px 11px;\n  height: 80vh; }\n\n.sidebar {\n  flex: 1;\n  color: green;\n  background: black; }\n\n.sidebar img {\n  height: 50px;\n  width: 50px; }\n\n.heading {\n  background: black;\n  color: green;\n  margin: 0;\n  padding: 20px 10px; }\n\n.box {\n  margin: 0 auto;\n  margin-top: 50px;\n  width: 50px;\n  height: 50px;\n  content: url(\"https://i.imgur.com/o1OlWwm.png\"); }\n\n.text {\n  margin-top: 0;\n  color: #fff;\n  text-align: center;\n  font-size: 28px;\n  letter-spacing: 1px; }\n\n.opac {\n  opacity: .8; }\n\n.move-cursor {\n  cursor: move; }\n\n.grab-cursor {\n  cursor: grab;\n  cursor: -webkit-grab; }\n", ""]);
 
 // exports
 
