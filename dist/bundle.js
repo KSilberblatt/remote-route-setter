@@ -60,173 +60,11 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(1);
-__webpack_require__(6);
-document.addEventListener("DOMContentLoaded", () => {
-  let gridSize = 50;
-  let deleteMode = false;
-
-  $(" .box ")
-    .draggable({ grid: [ gridSize, gridSize ] })
-
-  	.on("mouseover", function(){
-    	$( this ).addClass("move-cursor")
-  	})
-
-  	.on("mousedown", function(){
-    	$( this )
-        .removeClass("move-cursor")
-        .addClass("grab-cursor")
-        .addClass("opac");
-
-    	$(" .text ").hide();
-
-  	})
-
-  	.on("mouseup", function(){
-    	$( this )
-        .removeClass("grab-cursor")
-        .removeClass("opac")
-        .addClass("move-cursor");
-  	});
-
-    $(" .hold ").on("click",  (e) => {
-      let element = $(" .box ")[0];
-      let classList = element.classList;
-      for (let i = 0; i < classList.length; i++){
-        if (classList.item(i) !== "box"
-        && classList.item(i) !== "ui-draggable"
-        && classList.item(i) !== "ui-draggable-handle"){
-          classList.remove(classList.item(i));
-        }
-      }
-      $(" .box ").addClass("box");
-      $(" .box ").addClass(e.target.id);
-    });
-
-    $('#delete').click(() => {
-      if (deleteMode) {
-        $(' .grid ').removeClass("delete-cursor");
-        deleteMode = !deleteMode;
-      }
-      else {
-        deleteMode = !deleteMode;
-        $(' .grid ').addClass("delete-cursor");
-      }
-    });
-
-    let rotation = 5;
-    jQuery.fn.rotate =(degrees) => {
-        $(" .box ").css({'transform' : 'rotate('+ degrees +'deg)'});
-        return $(this);
-    };
-    $('.rotate').click(() => {
-        rotation += 5;
-        $(" .box ").rotate(rotation);
-    });
-    $('.crotate').click(() => {
-        rotation -= 5;
-        $(" .box ").rotate(rotation);
-    });
-    $('.rotate').on("mousedown", () => {
-        rotation += 5;
-        $(" .box ").rotate(rotation);
-    });
-
-    let interval;
-    $("#crotate")[0].addEventListener('mousedown', function(e) {
-      interval = setInterval(function() {
-        rotation -= 5;
-        $(" .box ").rotate(rotation);
-      }, 50);
-    });
-
-    $("#crotate ")[0].addEventListener('mouseup',function(e) {
-      clearInterval(interval);
-    });
-
-    $("#crotate")[0].addEventListener('mouseout',function(e) {
-      clearInterval(interval);
-    });
-    $("#rotate")[0].addEventListener('mousedown', function(e) {
-      interval = setInterval(function() {
-        rotation += 5;
-        $(" .box ").rotate(rotation);
-      }, 50);
-    });
-
-    $("#rotate ")[0].addEventListener('mouseup',function(e) {
-      clearInterval(interval);
-    });
-
-    $("#rotate")[0].addEventListener('mouseout',function(e) {
-      clearInterval(interval);
-    });
-
-    $(" .counterclockwise ").on("click", () => {
-      $(" .box ").rotate(rotation);
-    });
-    $(" .clockwise ").on("click", () => {
-      $(" .box ").rotate(rotation);
-    });
-
-});
-
-
-/***/ }),
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(2);
-if(typeof content === 'string') content = [[module.i, content, '']];
-// Prepare cssTransformation
-var transform;
-
-var options = {"hmr":true}
-options.transform = transform
-// add the styles to the DOM
-var update = __webpack_require__(4)(content, options);
-if(content.locals) module.exports = content.locals;
-// Hot Module Replacement
-if(false) {
-	// When the styles change, update the <style> tags
-	if(!content.locals) {
-		module.hot.accept("!!../node_modules/css-loader/index.js!../node_modules/sass-loader/lib/loader.js!./index.scss", function() {
-			var newContent = require("!!../node_modules/css-loader/index.js!../node_modules/sass-loader/lib/loader.js!./index.scss");
-			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-			update(newContent);
-		});
-	}
-	// When the module is disposed, remove the <style> tags
-	module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(3)(undefined);
-// imports
-
-
-// module
-exports.push([module.i, "/*// Code inspired by\n// https://codepen.io/dlouise/pen/NPZMjo\n// Dana Iti*/\n.content {\n  display: flex;\n  flex-direction: row;\n  height: 100%; }\n\n.heading {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between; }\n\n.heading img {\n  height: 50px;\n  width: 50px; }\n\n.heading img:hover {\n  cursor: pointer; }\n\n.grid {\n  flex: 5;\n  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAGUlEQVQYV2NkIBIwEqmOYVQh3pAiNnj+AwALaAEKfsPrZgAAAABJRU5ErkJggg==);\n  background-position: 18px 11px;\n  height: 80vh; }\n\n.sidebar {\n  flex: 1;\n  color: green;\n  background: black; }\n\n.sidebar img {\n  height: 50px;\n  width: 50px; }\n\n.sidebar img:hover {\n  cursor: pointer; }\n\n.heading {\n  background: black;\n  color: green;\n  margin: 0;\n  padding: 20px 10px; }\n\n.box {\n  margin: 0 auto;\n  margin-top: 50px;\n  width: 50px;\n  height: 50px; }\n\n.text {\n  margin-top: 0;\n  color: #fff;\n  text-align: center;\n  font-size: 28px;\n  letter-spacing: 1px; }\n\n.opac {\n  opacity: .8; }\n\n.move-cursor {\n  cursor: move; }\n\n.grab-cursor {\n  cursor: grab;\n  cursor: -webkit-grab; }\n\n.delete-cursor {\n  cursor: no-drop; }\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 3 */
 /***/ (function(module, exports) {
 
 /*
@@ -308,7 +146,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 4 */
+/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -680,6 +518,206 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(3);
+__webpack_require__(6);
+document.addEventListener("DOMContentLoaded", () => {
+  let gridSize = 50;
+  let deleteMode = false;
+  console.log("hey");
+  let holds = $( " .hold " );
+
+  // Draggable box [grid simulation]
+  let gridDrag = (ele) =>{
+      ele.draggable({ grid: [ gridSize, gridSize ] })
+
+    	.on("mouseover", function(){
+      	$( this ).addClass("move-cursor")
+    	})
+
+    	.on("mousedown", function(){
+      	$( this )
+          .removeClass("move-cursor")
+          .addClass("grab-cursor")
+          .addClass("opac");
+
+      	$(" .text ").hide();
+
+    	})
+
+    	.on("mouseup", function(){
+      	$( this )
+          .removeClass("grab-cursor")
+          .removeClass("opac")
+          .addClass("move-cursor");
+    	});
+    }
+  $(" .hold ").on("click",  (e) => {
+    let element = $(" .box ")[0];
+    let classList = element.classList;
+    for (let i = 0; i < classList.length; i++){
+      if (classList.item(i) !== "box"
+      && classList.item(i) !== "ui-draggable"
+      && classList.item(i) !== "ui-draggable-handle"){
+        classList.remove(classList.item(i));
+      }
+    }
+    $(" .box ").addClass("box");
+    $(" .box ").addClass(e.target.id);
+  });
+  //end
+
+  // Delete mode toggle
+  $('#delete').click(() => {
+    if (deleteMode) {
+      $(' .grid ').removeClass("delete-cursor");
+      deleteMode = !deleteMode;
+    }
+    else {
+      deleteMode = !deleteMode;
+      $(' .grid ').addClass("delete-cursor");
+    }
+  });
+  //end
+
+  //Rotate
+      //Rotate on click
+  let rotation = 5;
+  jQuery.fn.rotate =(degrees) => {
+      $(" .box ").css({'transform' : 'rotate('+ degrees +'deg)'});
+      return $(this);
+  };
+  $('.rotate').click(() => {
+      rotation += 5;
+      $(" .box ").rotate(rotation);
+  });
+  $('.crotate').click(() => {
+      rotation -= 5;
+      $(" .box ").rotate(rotation);
+  });
+  $('.rotate').on("mousedown", () => {
+      rotation += 5;
+      $(" .box ").rotate(rotation);
+  });
+  $(" .counterclockwise ").on("click", () => {
+    $(" .box ").rotate(rotation);
+  });
+  $(" .clockwise ").on("click", () => {
+    $(" .box ").rotate(rotation);
+  });
+  //end
+
+  // Rotate on hold
+  let interval;
+  $("#crotate")[0].addEventListener('mousedown', function(e) {
+    interval = setInterval(function() {
+      rotation -= 5;
+      $(" .box ").rotate(rotation);
+    }, 50);
+  });
+
+  $("#crotate ")[0].addEventListener('mouseup',function(e) {
+    clearInterval(interval);
+  });
+
+  $("#crotate")[0].addEventListener('mouseout',function(e) {
+    clearInterval(interval);
+  });
+  $("#rotate")[0].addEventListener('mousedown', function(e) {
+    interval = setInterval(function() {
+      rotation += 5;
+      $(" .box ").rotate(rotation);
+    }, 50);
+  });
+
+  $("#rotate ")[0].addEventListener('mouseup',function(e) {
+    clearInterval(interval);
+  });
+
+  $("#rotate")[0].addEventListener('mouseout',function(e) {
+    clearInterval(interval);
+  });
+    //end
+  //end
+
+  //Drag copy
+  $(" #sidebar img ").each( function( index, element ){
+    gridDrag($( this ));
+    $( this ).draggable({
+      revert: "invalid",
+      helper: "clone"
+     });
+
+  });
+  // for (let i = 0; i < holds.length; i++) {
+  //   holds[i].draggable({ revert: false });
+  //   console.log("ran");
+  // }
+  $( " #grid " ).droppable({
+    accept: "#sidebar img",
+    drop: function(event, ui){
+        let newHold = $(ui.helper).clone().removeClass('hold');
+        gridDrag(newHold);
+        $( " .box " ).removeClass("box");
+        newHold.addClass("box");
+        $(this).append(newHold);
+    }
+  });
+
+  // hold ui-draggable ui-draggable-handle ui-draggable-dragging
+  //end
+
+});
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(4);
+if(typeof content === 'string') content = [[module.i, content, '']];
+// Prepare cssTransformation
+var transform;
+
+var options = {"hmr":true}
+options.transform = transform
+// add the styles to the DOM
+var update = __webpack_require__(1)(content, options);
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(false) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("!!../node_modules/css-loader/index.js!../node_modules/sass-loader/lib/loader.js!./index.scss", function() {
+			var newContent = require("!!../node_modules/css-loader/index.js!../node_modules/sass-loader/lib/loader.js!./index.scss");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(0)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "/*// Code inspired by\n// https://codepen.io/dlouise/pen/NPZMjo\n// Dana Iti*/\n.content {\n  display: flex;\n  flex-direction: row;\n  height: 100%; }\n\n.heading {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between; }\n\n.heading img {\n  height: 50px;\n  width: 50px; }\n\n.heading img:hover {\n  cursor: pointer; }\n\n.grid {\n  flex: 5;\n  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAGUlEQVQYV2NkIBIwEqmOYVQh3pAiNnj+AwALaAEKfsPrZgAAAABJRU5ErkJggg==);\n  background-position: 18px 11px;\n  height: 80vh; }\n\n.sidebar {\n  flex: 1;\n  color: green;\n  background: black; }\n\n.sidebar img {\n  height: 50px;\n  width: 50px; }\n\n.sidebar img:hover {\n  cursor: pointer; }\n\n.heading {\n  background: black;\n  color: green;\n  margin: 0;\n  padding: 20px 10px; }\n\n.box {\n  border: lightgrey 1px solid;\n  margin: 0 auto;\n  width: 50px;\n  height: 50px; }\n\n.text {\n  margin-top: 0;\n  color: #fff;\n  text-align: center;\n  font-size: 28px;\n  letter-spacing: 1px; }\n\n.opac {\n  opacity: .8; }\n\n.move-cursor {\n  cursor: move; }\n\n.grab-cursor {\n  cursor: grab;\n  cursor: -webkit-grab; }\n\n.delete-cursor {\n  cursor: no-drop; }\n", ""]);
+
+// exports
+
+
+/***/ }),
 /* 5 */
 /***/ (function(module, exports) {
 
@@ -789,7 +827,7 @@ var transform;
 var options = {"hmr":true}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(4)(content, options);
+var update = __webpack_require__(1)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -809,12 +847,12 @@ if(false) {
 /* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(3)(undefined);
+exports = module.exports = __webpack_require__(0)(undefined);
 // imports
 
 
 // module
-exports.push([module.i, ".hand1 {\n  margin: 0 auto;\n  margin-top: 50px;\n  width: 50px;\n  height: 50px;\n  content: url(\"https://i.imgur.com/MzqxIK4.png\"); }\n\n.hand2 {\n  margin: 0 auto;\n  margin-top: 50px;\n  width: 50px;\n  height: 50px;\n  content: url(\"https://i.imgur.com/C6EXmSl.png\"); }\n\n.hand3 {\n  margin: 0 auto;\n  margin-top: 50px;\n  width: 50px;\n  height: 50px;\n  content: url(\"https://i.imgur.com/o1OlWwm.png\"); }\n\n.foot1 {\n  margin: 0 auto;\n  margin-top: 50px;\n  width: 50px;\n  height: 50px;\n  content: url(\"https://i.imgur.com/CmtJTtQ.png\"); }\n", ""]);
+exports.push([module.i, ".hand1 {\n  margin: 0 auto;\n  margin-top: 50px;\n  width: 50px;\n  height: 50px;\n  content: url(\"https://i.imgur.com/MzqxIK4.png\"); }\n\n.hand2 {\n  margin: 0 auto;\n  margin-top: 50px;\n  width: 50px;\n  height: 50px;\n  content: url(\"https://i.imgur.com/C6EXmSl.png\"); }\n\n.hand3 {\n  margin: 0 auto;\n  margin-top: 50px;\n  width: 50px;\n  height: 50px;\n  content: url(\"https://i.imgur.com/o1OlWwm.png\"); }\n\n.foot1 {\n  margin: 0 auto;\n  margin-top: 50px;\n  width: 50px;\n  height: 50px;\n  content: url(\"https://i.imgur.com/CmtJTtQ.png\"); }\n\n.content img {\n  width: 50px;\n  height: 50px; }\n", ""]);
 
 // exports
 
