@@ -528,9 +528,32 @@ document.addEventListener("DOMContentLoaded", () => {
   let deleteMode = false;
   console.log("hey");
   let holds = $( " .hold " );
+  let rotation = 5;
 
   // Draggable box [grid simulation]
-  let gridDrag = (ele) =>{
+  let makeBox = (ele) => {
+    $( " .box " ).removeClass("box");
+    ele.addClass("box");
+
+    // let st = window.getComputedStyle(ele, null);
+    //
+    // let tr = st.getPropertyValue("-webkit-transform") ||
+    //          st.getPropertyValue("-moz-transform") ||
+    //          st.getPropertyValue("-ms-transform") ||
+    //          st.getPropertyValue("-o-transform") ||
+    //          st.getPropertyValue("transform");
+    // let values;
+    // values = tr.split('(')[1],
+    // values = values.split(')')[0],
+    // values = values.split(',');
+    //
+    // let a = values[0];
+    // let b = values[1];
+    // let c = values[2];
+    // let d = values[3];
+    // console.log(a,b,c,d);
+  };
+  let gridDrag = (ele) => {
       ele.draggable({ grid: [ gridSize, gridSize ] })
 
     	.on("mouseover", function(){
@@ -542,8 +565,9 @@ document.addEventListener("DOMContentLoaded", () => {
           .removeClass("move-cursor")
           .addClass("grab-cursor")
           .addClass("opac");
-
-      	$(" .text ").hide();
+        if ($( this ).hasClass("route-hold")){
+          makeBox($( this ));
+        }
 
     	})
 
@@ -554,20 +578,11 @@ document.addEventListener("DOMContentLoaded", () => {
           .addClass("move-cursor");
     	});
     }
-  $(" .hold ").on("click",  (e) => {
-    let element = $(" .box ")[0];
-    let classList = element.classList;
-    for (let i = 0; i < classList.length; i++){
-      if (classList.item(i) !== "box"
-      && classList.item(i) !== "ui-draggable"
-      && classList.item(i) !== "ui-draggable-handle"){
-        classList.remove(classList.item(i));
-      }
-    }
-    $(" .box ").addClass("box");
-    $(" .box ").addClass(e.target.id);
-  });
-  //end
+    $(" .route-hold ").on("click",  (e) => {
+      let element = $(" .route-hold ")[0];
+      makeBox(element);
+      console.log("press");
+    });
 
   // Delete mode toggle
   $('#delete').click(() => {
@@ -584,7 +599,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   //Rotate
       //Rotate on click
-  let rotation = 5;
+
   jQuery.fn.rotate =(degrees) => {
       $(" .box ").css({'transform' : 'rotate('+ degrees +'deg)'});
       return $(this);
@@ -659,9 +674,9 @@ document.addEventListener("DOMContentLoaded", () => {
     accept: "#sidebar img",
     drop: function(event, ui){
         let newHold = $(ui.helper).clone().removeClass('hold');
+        newHold.addClass("route-hold");
         gridDrag(newHold);
-        $( " .box " ).removeClass("box");
-        newHold.addClass("box");
+        makeBox(newHold);
         $(this).append(newHold);
     }
   });
@@ -712,7 +727,7 @@ exports = module.exports = __webpack_require__(0)(undefined);
 
 
 // module
-exports.push([module.i, "/*// Code inspired by\n// https://codepen.io/dlouise/pen/NPZMjo\n// Dana Iti*/\n.content {\n  display: flex;\n  flex-direction: row;\n  height: 100%; }\n\n.heading {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between; }\n\n.heading img {\n  height: 50px;\n  width: 50px; }\n\n.heading img:hover {\n  cursor: pointer; }\n\n.grid {\n  flex: 5;\n  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAGUlEQVQYV2NkIBIwEqmOYVQh3pAiNnj+AwALaAEKfsPrZgAAAABJRU5ErkJggg==);\n  background-position: 18px 11px;\n  height: 80vh; }\n\n.sidebar {\n  flex: 1;\n  color: green;\n  background: black; }\n\n.sidebar img {\n  height: 50px;\n  width: 50px; }\n\n.sidebar img:hover {\n  cursor: pointer; }\n\n.heading {\n  background: black;\n  color: green;\n  margin: 0;\n  padding: 20px 10px; }\n\n.box {\n  border: lightgrey 1px solid;\n  margin: 0 auto;\n  width: 50px;\n  height: 50px; }\n\n.text {\n  margin-top: 0;\n  color: #fff;\n  text-align: center;\n  font-size: 28px;\n  letter-spacing: 1px; }\n\n.opac {\n  opacity: .8; }\n\n.move-cursor {\n  cursor: move; }\n\n.grab-cursor {\n  cursor: grab;\n  cursor: -webkit-grab; }\n\n.delete-cursor {\n  cursor: no-drop; }\n", ""]);
+exports.push([module.i, "/*// Code inspired by\n// https://codepen.io/dlouise/pen/NPZMjo\n// Dana Iti*/\n.content {\n  display: flex;\n  flex-direction: row;\n  height: 100%;\n  z-index: -1; }\n\n.heading {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n  z-index: 1; }\n\n.heading img {\n  height: 50px;\n  width: 50px; }\n\n.heading img:hover {\n  cursor: pointer; }\n\n.grid {\n  flex: 5;\n  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAGUlEQVQYV2NkIBIwEqmOYVQh3pAiNnj+AwALaAEKfsPrZgAAAABJRU5ErkJggg==);\n  background-position: 18px 11px;\n  height: 80vh; }\n\n.sidebar {\n  flex: 1;\n  color: green;\n  background: black;\n  z-index: 1; }\n\n.sidebar img {\n  height: 50px;\n  width: 50px; }\n\n.sidebar img:hover {\n  cursor: pointer; }\n\n.heading {\n  background: black;\n  color: green;\n  margin: 0;\n  padding: 20px 10px; }\n\n.box {\n  border: lightgrey 1px solid;\n  margin: 0 auto;\n  width: 50px;\n  height: 50px; }\n\n.text {\n  margin-top: 0;\n  color: #fff;\n  text-align: center;\n  font-size: 28px;\n  letter-spacing: 1px; }\n\n.opac {\n  opacity: .8; }\n\n.move-cursor {\n  cursor: move; }\n\n.grab-cursor {\n  cursor: grab;\n  cursor: -webkit-grab; }\n\n.delete-cursor {\n  cursor: no-drop; }\n", ""]);
 
 // exports
 
@@ -852,7 +867,7 @@ exports = module.exports = __webpack_require__(0)(undefined);
 
 
 // module
-exports.push([module.i, ".hand1 {\n  margin: 0 auto;\n  margin-top: 50px;\n  width: 50px;\n  height: 50px;\n  content: url(\"https://i.imgur.com/MzqxIK4.png\"); }\n\n.hand2 {\n  margin: 0 auto;\n  margin-top: 50px;\n  width: 50px;\n  height: 50px;\n  content: url(\"https://i.imgur.com/C6EXmSl.png\"); }\n\n.hand3 {\n  margin: 0 auto;\n  margin-top: 50px;\n  width: 50px;\n  height: 50px;\n  content: url(\"https://i.imgur.com/o1OlWwm.png\"); }\n\n.foot1 {\n  margin: 0 auto;\n  margin-top: 50px;\n  width: 50px;\n  height: 50px;\n  content: url(\"https://i.imgur.com/CmtJTtQ.png\"); }\n\n.content img {\n  width: 50px;\n  height: 50px; }\n", ""]);
+exports.push([module.i, ".hand1 {\n  margin: 0 auto;\n  margin-top: 50px;\n  width: 50px;\n  height: 50px;\n  content: url(\"https://i.imgur.com/MzqxIK4.png\"); }\n\n.hand2 {\n  margin: 0 auto;\n  margin-top: 50px;\n  width: 50px;\n  height: 50px;\n  content: url(\"https://i.imgur.com/C6EXmSl.png\"); }\n\n.hand3 {\n  margin: 0 auto;\n  margin-top: 50px;\n  width: 50px;\n  height: 50px;\n  content: url(\"https://i.imgur.com/o1OlWwm.png\"); }\n\n.foot1 {\n  margin: 0 auto;\n  margin-top: 50px;\n  width: 50px;\n  height: 50px;\n  content: url(\"https://i.imgur.com/CmtJTtQ.png\"); }\n\n.content img {\n  width: 50px;\n  height: 50px;\n  z-index: 0; }\n", ""]);
 
 // exports
 
