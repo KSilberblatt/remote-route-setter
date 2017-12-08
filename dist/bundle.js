@@ -559,7 +559,6 @@ document.addEventListener("DOMContentLoaded", () => {
     let ele = $(" .box ")[0];
     if(e.keyCode === 8 || e.keyCode === 46)  {
       ele.remove();
-      console.log("ran");
     }
   });
   //Drag copy
@@ -907,7 +906,6 @@ function deletion(deleteMode){
       let ele = $(" .box ")[0];
       if(e.keyCode === 8 || e.keyCode === 46) {
         ele.remove();
-        console.log("ran");
       }
     });
   }
