@@ -525,35 +525,43 @@ function updateLink (link, options, obj) {
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__dist_helperfunctions_js__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__dist_holds_js__ = __webpack_require__(9);
+__webpack_require__(10);
 __webpack_require__(3);
 __webpack_require__(6);
+
 
 
 document.addEventListener("DOMContentLoaded", () => {
   let holdIndex=0;
   let deleteMode = false;
-  console.log("hey");
   let holds = $( " .hold " );
 
     $(" .route-hold ").on("click",  (e) => {
       let element = $(" .route-hold ")[0];
       Object(__WEBPACK_IMPORTED_MODULE_0__dist_helperfunctions_js__["b" /* makeBox */])(element);
-      console.log("press");
     });
 
   // Delete mode toggle
-  $('#delete').click(() => {
-    if (deleteMode) {
-      $(' .grid ').removeClass("delete-cursor");
-      deleteMode = !deleteMode;
-    }
-    else {
-      deleteMode = !deleteMode;
-      $(' .grid ').addClass("delete-cursor");
-    }
-  });
+  // $('#delete').click(() => {
+  //   if (deleteMode) {
+  //     $(' .grid ').removeClass("delete-cursor");
+  //     deleteMode = !deleteMode;
+  //   }
+  //   else {
+  //     deleteMode = !deleteMode;
+  //     $(' .grid ').addClass("delete-cursor");
+  //   }
+  // });
   //end
   Object(__WEBPACK_IMPORTED_MODULE_0__dist_helperfunctions_js__["c" /* rotateOnClick */])();
+
+  $("body").keydown(function(e) {
+    let ele = $(" .box ")[0];
+    if(e.keyCode === 8 || e.keyCode === 46)  {
+      ele.remove();
+      console.log("ran");
+    }
+  });
   //Drag copy
   $(" #sidebar img ").each( function( index, element ){
     Object(__WEBPACK_IMPORTED_MODULE_0__dist_helperfunctions_js__["a" /* gridDrag */])($( this ));
@@ -584,23 +592,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // hold ui-draggable ui-draggable-handle ui-draggable-dragging
   //end
-  jQuery.fn.rotate =(degrees) => {
-      $(" .box ").css({'transform' : 'rotate('+ degrees +'deg)'});
-      return $(this);
-  };
-  $("body").keydown(function(e) {
-    let ele = $(" .box ")[0];
-    console.log($(" .box "));
-    console.log($(" .box ")[0]);
-  if(e.keyCode === 37) { // left
-    ele.setAttribute("alt", `${parseInt(ele.getAttribute("alt")) - 5}`);
-    $(" .box ").rotate(parseInt(ele.getAttribute("alt")));
-    }
-  else if(e.keyCode === 39) { // right
-      ele.setAttribute("alt", `${parseInt(ele.getAttribute("alt")) + 5}`);
-    $(" .box ").rotate(parseInt(ele.getAttribute("alt")));
-    }
-  });
+
 });
 
 
@@ -644,7 +636,7 @@ exports = module.exports = __webpack_require__(0)(undefined);
 
 
 // module
-exports.push([module.i, "/*// Code inspired by\n// https://codepen.io/dlouise/pen/NPZMjo\n// Dana Iti*/\n.content {\n  display: flex;\n  flex-direction: row;\n  height: 100%; }\n\n.heading {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between; }\n\n.heading img {\n  height: 50px;\n  width: 50px; }\n\n.heading img:hover {\n  cursor: pointer; }\n\n.grid {\n  flex: 5;\n  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAGUlEQVQYV2NkIBIwEqmOYVQh3pAiNnj+AwALaAEKfsPrZgAAAABJRU5ErkJggg==);\n  background-position: 18px 11px;\n  height: 80vh; }\n\n.sidebar {\n  flex: 1;\n  color: green;\n  background: black; }\n\n.sidebar img {\n  height: 50px;\n  width: 50px; }\n\n.sidebar img:hover {\n  cursor: pointer; }\n\n.heading {\n  background: black;\n  color: green;\n  margin: 0;\n  padding: 20px 10px; }\n\n#page {\n  display: flex;\n  flex-direction: column; }\n\n.text {\n  margin-top: 0;\n  color: #fff;\n  text-align: center;\n  font-size: 28px;\n  letter-spacing: 1px; }\n\n.opac {\n  opacity: .8; }\n\n.move-cursor {\n  cursor: move; }\n\n.grab-cursor {\n  cursor: grab;\n  cursor: -webkit-grab; }\n\n.delete-cursor {\n  cursor: no-drop; }\n", ""]);
+exports.push([module.i, "body {\n  height: 100%;\n  width: 100%; }\n\nh1 {\n  padding-left: 10px;\n  font-size: 28px; }\n\nh2 {\n  padding-left: 10px;\n  font-size: 20px; }\n\n.content {\n  color: white;\n  display: flex;\n  flex-direction: row;\n  height: 89vh;\n  flex: 9; }\n\n.heading {\n  color: white;\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n  flex: 1; }\n\n.heading img {\n  height: 50px;\n  width: 50px; }\n\n.heading img:hover {\n  cursor: pointer; }\n\n.grid {\n  /*// Code inspired by\n  // https://codepen.io/dlouise/pen/NPZMjo\n  // Dana Iti*/\n  flex: 5;\n  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAGUlEQVQYV2NkIBIwEqmOYVQh3pAiNnj+AwALaAEKfsPrZgAAAABJRU5ErkJggg==);\n  background-position: 18px 11px; }\n\n.sidebar {\n  flex: 1;\n  background: black; }\n\n.sidebar img {\n  text-align: center;\n  height: 50px;\n  width: 50px; }\n\n.sidebar img:hover {\n  cursor: pointer; }\n\n.heading {\n  background: black;\n  margin: 0;\n  padding: 20px 10px; }\n\n#page {\n  height: 100%;\n  width: 100%;\n  display: flex;\n  flex-direction: column; }\n\n.text {\n  margin-top: 0;\n  color: #fff;\n  text-align: center;\n  font-size: 28px;\n  letter-spacing: 1px; }\n\n.opac {\n  opacity: .8; }\n\n.move-cursor {\n  cursor: move; }\n\n.grab-cursor {\n  cursor: grab;\n  cursor: -webkit-grab; }\n\n.delete-cursor {\n  cursor: no-drop; }\n", ""]);
 
 // exports
 
@@ -795,6 +787,7 @@ exports.push([module.i, ".hand1 {\n  margin: 0 auto;\n  margin-top: 50px;\n  wid
 
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["c"] = rotateOnClick;
+/* unused harmony export deletion */
 let gridSize = 50;
 const gridDrag = (ele) => {
     ele.draggable({ grid: [ gridSize, gridSize ] })
@@ -820,6 +813,7 @@ const gridDrag = (ele) => {
         .removeClass("opac")
         .addClass("move-cursor");
     });
+
 };
 /* harmony export (immutable) */ __webpack_exports__["a"] = gridDrag;
 
@@ -878,6 +872,25 @@ function rotateOnClick(){
   $("#rotate")[0].addEventListener('mouseout',function(e) {
     clearInterval(interval);
   });
+
+  jQuery.fn.rotate =(degrees) => {
+    /*// Code inspired by
+    // https://codepen.io/dlouise/pen/NPZMjo
+    // Dana Iti*/
+      $(" .box ").css({'transform' : 'rotate('+ degrees +'deg)'});
+      return $(this);
+  };
+  $("body").keydown(function(e) {
+    let ele = $(" .box ")[0];
+  if(e.keyCode === 37) { // left
+    ele.setAttribute("alt", `${parseInt(ele.getAttribute("alt")) - 5}`);
+    $(" .box ").rotate(parseInt(ele.getAttribute("alt")));
+    }
+  else if(e.keyCode === 39) { // right
+      ele.setAttribute("alt", `${parseInt(ele.getAttribute("alt")) + 5}`);
+    $(" .box ").rotate(parseInt(ele.getAttribute("alt")));
+    }
+  });
 }
 
 function rotateEle(){
@@ -886,6 +899,18 @@ function rotateEle(){
 function setRotate(deg){
   $(" .box ")[0].setAttribute("alt",
   `${parseInt($(" .box ")[0].getAttribute("alt")) + deg}`);
+}
+
+function deletion(deleteMode){
+  if (deleteMode){
+    $("body").keydown(function(e) {
+      let ele = $(" .box ")[0];
+      if(e.keyCode === 8 || e.keyCode === 46) {
+        ele.remove();
+        console.log("ran");
+      }
+    });
+  }
 }
 
 
@@ -906,6 +931,51 @@ class Hold {
 }
 /* unused harmony export default */
 
+
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(11);
+if(typeof content === 'string') content = [[module.i, content, '']];
+// Prepare cssTransformation
+var transform;
+
+var options = {"hmr":true}
+options.transform = transform
+// add the styles to the DOM
+var update = __webpack_require__(1)(content, options);
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(false) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("!!../node_modules/css-loader/index.js!../node_modules/sass-loader/lib/loader.js!./reset.scss", function() {
+			var newContent = require("!!../node_modules/css-loader/index.js!../node_modules/sass-loader/lib/loader.js!./reset.scss");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(0)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "html, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, font, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  font-weight: inherit;\n  font-style: inherit;\n  font-size: 100%;\n  font-family: inherit;\n  vertical-align: baseline; }\n\n/* remember to define focus styles! */\n:focus {\n  outline: 0; }\n\nbody {\n  line-height: 1;\n  color: black;\n  background: white; }\n\nol, ul {\n  list-style: none; }\n\n/* tables still need 'cellspacing=\"0\"' in the markup */\ntable {\n  border-collapse: separate;\n  border-spacing: 0; }\n\ncaption, th, td {\n  text-align: left;\n  font-weight: normal; }\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: \"\"; }\n\nblockquote, q {\n  quotes: \"\" \"\"; }\n", ""]);
+
+// exports
 
 
 /***/ })

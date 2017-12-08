@@ -23,6 +23,7 @@ export const gridDrag = (ele) => {
         .removeClass("opac")
         .addClass("move-cursor");
     });
+
 };
 
 
@@ -77,6 +78,25 @@ export function rotateOnClick(){
   $("#rotate")[0].addEventListener('mouseout',function(e) {
     clearInterval(interval);
   });
+
+  jQuery.fn.rotate =(degrees) => {
+    /*// Code inspired by
+    // https://codepen.io/dlouise/pen/NPZMjo
+    // Dana Iti*/
+      $(" .box ").css({'transform' : 'rotate('+ degrees +'deg)'});
+      return $(this);
+  };
+  $("body").keydown(function(e) {
+    let ele = $(" .box ")[0];
+  if(e.keyCode === 37) { // left
+    ele.setAttribute("alt", `${parseInt(ele.getAttribute("alt")) - 5}`);
+    $(" .box ").rotate(parseInt(ele.getAttribute("alt")));
+    }
+  else if(e.keyCode === 39) { // right
+      ele.setAttribute("alt", `${parseInt(ele.getAttribute("alt")) + 5}`);
+    $(" .box ").rotate(parseInt(ele.getAttribute("alt")));
+    }
+  });
 }
 
 function rotateEle(){
@@ -85,4 +105,16 @@ function rotateEle(){
 function setRotate(deg){
   $(" .box ")[0].setAttribute("alt",
   `${parseInt($(" .box ")[0].getAttribute("alt")) + deg}`);
+}
+
+export function deletion(deleteMode){
+  if (deleteMode){
+    $("body").keydown(function(e) {
+      let ele = $(" .box ")[0];
+      if(e.keyCode === 8 || e.keyCode === 46) {
+        ele.remove();
+        console.log("ran");
+      }
+    });
+  }
 }
