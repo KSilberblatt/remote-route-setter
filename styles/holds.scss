@@ -1,35 +1,41 @@
-.hand1 {
-  margin: 0 auto;
-  margin-top: 50px;
-  width: 50px;
-  height: 50px;
-  content:url("https://i.imgur.com/MzqxIK4.png");
-}
-.hand2 {
-  margin: 0 auto;
-  margin-top: 50px;
-  width: 50px;
-  height: 50px;
-  content:url("https://i.imgur.com/C6EXmSl.png");
-}
-.hand3 {
-  margin: 0 auto;
-  margin-top: 50px;
-  width: 50px;
-  height: 50px;
-  content:url("https://i.imgur.com/o1OlWwm.png");
-}
-.foot1 {
-  margin: 0 auto;
-  margin-top: 50px;
-  width: 50px;
-  height: 50px;
-  content:url("https://i.imgur.com/CmtJTtQ.png");
-}
 
+
+.footborder{
+  padding-top: 5px;
+  margin-left: 10%;
+  height: 1px;
+  width: 80%;
+  border-bottom:1px solid grey;
+}
+.handborder{
+  padding-top: 5px;
+  margin-left: 10%;
+  height: 1px;
+  width: 80%;
+  border-bottom:1px solid grey;
+}
+.handholds{
+  padding-bottom: 10px;
+  margin: 0 auto;
+}
+.footholds{
+
+}
+.handwrapper{
+  width: 80%;
+  margin: 0 auto;
+}
+.footwrapper{
+  margin: 0 auto;
+  width: 80%;
+}
 .content img {
   width: 50px;
   height: 50px;
+}
+.content img:hover {
+  background: grey;
+  border-radius: 5px;
 }
 #heading{
   z-index: 1;
