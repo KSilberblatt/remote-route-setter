@@ -519,68 +519,25 @@ function updateLink (link, options, obj) {
 
 /***/ }),
 /* 2 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__dist_helperfunctions_js__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__dist_holds_js__ = __webpack_require__(9);
 __webpack_require__(3);
 __webpack_require__(6);
+
+
 document.addEventListener("DOMContentLoaded", () => {
-  let gridSize = 50;
+  let holdIndex=0;
   let deleteMode = false;
   console.log("hey");
   let holds = $( " .hold " );
-  let rotation = 5;
 
-  // Draggable box [grid simulation]
-  let makeBox = (ele) => {
-    $( " .box " ).removeClass("box");
-    ele.addClass("box");
-
-    // let st = window.getComputedStyle(ele, null);
-    //
-    // let tr = st.getPropertyValue("-webkit-transform") ||
-    //          st.getPropertyValue("-moz-transform") ||
-    //          st.getPropertyValue("-ms-transform") ||
-    //          st.getPropertyValue("-o-transform") ||
-    //          st.getPropertyValue("transform");
-    // let values;
-    // values = tr.split('(')[1],
-    // values = values.split(')')[0],
-    // values = values.split(',');
-    //
-    // let a = values[0];
-    // let b = values[1];
-    // let c = values[2];
-    // let d = values[3];
-    // console.log(a,b,c,d);
-  };
-  let gridDrag = (ele) => {
-      ele.draggable({ grid: [ gridSize, gridSize ] })
-
-    	.on("mouseover", function(){
-      	$( this ).addClass("move-cursor")
-    	})
-
-    	.on("mousedown", function(){
-      	$( this )
-          .removeClass("move-cursor")
-          .addClass("grab-cursor")
-          .addClass("opac");
-        if ($( this ).hasClass("route-hold")){
-          makeBox($( this ));
-        }
-
-    	})
-
-    	.on("mouseup", function(){
-      	$( this )
-          .removeClass("grab-cursor")
-          .removeClass("opac")
-          .addClass("move-cursor");
-    	});
-    }
     $(" .route-hold ").on("click",  (e) => {
       let element = $(" .route-hold ")[0];
-      makeBox(element);
+      Object(__WEBPACK_IMPORTED_MODULE_0__dist_helperfunctions_js__["b" /* makeBox */])(element);
       console.log("press");
     });
 
@@ -596,70 +553,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
   //end
-
-  //Rotate
-      //Rotate on click
-
-  jQuery.fn.rotate =(degrees) => {
-      $(" .box ").css({'transform' : 'rotate('+ degrees +'deg)'});
-      return $(this);
-  };
-  $('.rotate').click(() => {
-      rotation += 5;
-      $(" .box ").rotate(rotation);
-  });
-  $('.crotate').click(() => {
-      rotation -= 5;
-      $(" .box ").rotate(rotation);
-  });
-  $('.rotate').on("mousedown", () => {
-      rotation += 5;
-      $(" .box ").rotate(rotation);
-  });
-  $(" .counterclockwise ").on("click", () => {
-    $(" .box ").rotate(rotation);
-  });
-  $(" .clockwise ").on("click", () => {
-    $(" .box ").rotate(rotation);
-  });
-  //end
-
-  // Rotate on hold
-  let interval;
-  $("#crotate")[0].addEventListener('mousedown', function(e) {
-    interval = setInterval(function() {
-      rotation -= 5;
-      $(" .box ").rotate(rotation);
-    }, 50);
-  });
-
-  $("#crotate ")[0].addEventListener('mouseup',function(e) {
-    clearInterval(interval);
-  });
-
-  $("#crotate")[0].addEventListener('mouseout',function(e) {
-    clearInterval(interval);
-  });
-  $("#rotate")[0].addEventListener('mousedown', function(e) {
-    interval = setInterval(function() {
-      rotation += 5;
-      $(" .box ").rotate(rotation);
-    }, 50);
-  });
-
-  $("#rotate ")[0].addEventListener('mouseup',function(e) {
-    clearInterval(interval);
-  });
-
-  $("#rotate")[0].addEventListener('mouseout',function(e) {
-    clearInterval(interval);
-  });
-    //end
-  //end
-
+  Object(__WEBPACK_IMPORTED_MODULE_0__dist_helperfunctions_js__["c" /* rotateOnClick */])();
   //Drag copy
   $(" #sidebar img ").each( function( index, element ){
-    gridDrag($( this ));
+    Object(__WEBPACK_IMPORTED_MODULE_0__dist_helperfunctions_js__["a" /* gridDrag */])($( this ));
     $( this ).draggable({
       revert: "invalid",
       helper: "clone"
@@ -673,17 +570,37 @@ document.addEventListener("DOMContentLoaded", () => {
   $( " #grid " ).droppable({
     accept: "#sidebar img",
     drop: function(event, ui){
-        let newHold = $(ui.helper).clone().removeClass('hold');
-        newHold.addClass("route-hold");
-        gridDrag(newHold);
-        makeBox(newHold);
-        $(this).append(newHold);
+        let clone = $(ui.helper).clone().removeClass('hold');
+        clone.addClass("route-hold");
+        Object(__WEBPACK_IMPORTED_MODULE_0__dist_helperfunctions_js__["a" /* gridDrag */])(clone);
+        Object(__WEBPACK_IMPORTED_MODULE_0__dist_helperfunctions_js__["b" /* makeBox */])(clone);
+        $(this).append(clone);
+        // let newHold = new Hold(
+        //   $(ui.helper).attr('name')+`${holdIndex}`,
+        //   clone);
+        holdIndex++;
     }
   });
 
   // hold ui-draggable ui-draggable-handle ui-draggable-dragging
   //end
-
+  jQuery.fn.rotate =(degrees) => {
+      $(" .box ").css({'transform' : 'rotate('+ degrees +'deg)'});
+      return $(this);
+  };
+  $("body").keydown(function(e) {
+    let ele = $(" .box ")[0];
+    console.log($(" .box "));
+    console.log($(" .box ")[0]);
+  if(e.keyCode === 37) { // left
+    ele.setAttribute("alt", `${parseInt(ele.getAttribute("alt")) - 5}`);
+    $(" .box ").rotate(parseInt(ele.getAttribute("alt")));
+    }
+  else if(e.keyCode === 39) { // right
+      ele.setAttribute("alt", `${parseInt(ele.getAttribute("alt")) + 5}`);
+    $(" .box ").rotate(parseInt(ele.getAttribute("alt")));
+    }
+  });
 });
 
 
@@ -727,7 +644,7 @@ exports = module.exports = __webpack_require__(0)(undefined);
 
 
 // module
-exports.push([module.i, "/*// Code inspired by\n// https://codepen.io/dlouise/pen/NPZMjo\n// Dana Iti*/\n.content {\n  display: flex;\n  flex-direction: row;\n  height: 100%;\n  z-index: -1; }\n\n.heading {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n  z-index: 1; }\n\n.heading img {\n  height: 50px;\n  width: 50px; }\n\n.heading img:hover {\n  cursor: pointer; }\n\n.grid {\n  flex: 5;\n  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAGUlEQVQYV2NkIBIwEqmOYVQh3pAiNnj+AwALaAEKfsPrZgAAAABJRU5ErkJggg==);\n  background-position: 18px 11px;\n  height: 80vh; }\n\n.sidebar {\n  flex: 1;\n  color: green;\n  background: black;\n  z-index: 1; }\n\n.sidebar img {\n  height: 50px;\n  width: 50px; }\n\n.sidebar img:hover {\n  cursor: pointer; }\n\n.heading {\n  background: black;\n  color: green;\n  margin: 0;\n  padding: 20px 10px; }\n\n.box {\n  border: lightgrey 1px solid;\n  margin: 0 auto;\n  width: 50px;\n  height: 50px; }\n\n.text {\n  margin-top: 0;\n  color: #fff;\n  text-align: center;\n  font-size: 28px;\n  letter-spacing: 1px; }\n\n.opac {\n  opacity: .8; }\n\n.move-cursor {\n  cursor: move; }\n\n.grab-cursor {\n  cursor: grab;\n  cursor: -webkit-grab; }\n\n.delete-cursor {\n  cursor: no-drop; }\n", ""]);
+exports.push([module.i, "/*// Code inspired by\n// https://codepen.io/dlouise/pen/NPZMjo\n// Dana Iti*/\n.content {\n  display: flex;\n  flex-direction: row;\n  height: 100%; }\n\n.heading {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between; }\n\n.heading img {\n  height: 50px;\n  width: 50px; }\n\n.heading img:hover {\n  cursor: pointer; }\n\n.grid {\n  flex: 5;\n  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAGUlEQVQYV2NkIBIwEqmOYVQh3pAiNnj+AwALaAEKfsPrZgAAAABJRU5ErkJggg==);\n  background-position: 18px 11px;\n  height: 80vh; }\n\n.sidebar {\n  flex: 1;\n  color: green;\n  background: black; }\n\n.sidebar img {\n  height: 50px;\n  width: 50px; }\n\n.sidebar img:hover {\n  cursor: pointer; }\n\n.heading {\n  background: black;\n  color: green;\n  margin: 0;\n  padding: 20px 10px; }\n\n#page {\n  display: flex;\n  flex-direction: column; }\n\n.text {\n  margin-top: 0;\n  color: #fff;\n  text-align: center;\n  font-size: 28px;\n  letter-spacing: 1px; }\n\n.opac {\n  opacity: .8; }\n\n.move-cursor {\n  cursor: move; }\n\n.grab-cursor {\n  cursor: grab;\n  cursor: -webkit-grab; }\n\n.delete-cursor {\n  cursor: no-drop; }\n", ""]);
 
 // exports
 
@@ -867,9 +784,128 @@ exports = module.exports = __webpack_require__(0)(undefined);
 
 
 // module
-exports.push([module.i, ".hand1 {\n  margin: 0 auto;\n  margin-top: 50px;\n  width: 50px;\n  height: 50px;\n  content: url(\"https://i.imgur.com/MzqxIK4.png\"); }\n\n.hand2 {\n  margin: 0 auto;\n  margin-top: 50px;\n  width: 50px;\n  height: 50px;\n  content: url(\"https://i.imgur.com/C6EXmSl.png\"); }\n\n.hand3 {\n  margin: 0 auto;\n  margin-top: 50px;\n  width: 50px;\n  height: 50px;\n  content: url(\"https://i.imgur.com/o1OlWwm.png\"); }\n\n.foot1 {\n  margin: 0 auto;\n  margin-top: 50px;\n  width: 50px;\n  height: 50px;\n  content: url(\"https://i.imgur.com/CmtJTtQ.png\"); }\n\n.content img {\n  width: 50px;\n  height: 50px;\n  z-index: 0; }\n", ""]);
+exports.push([module.i, ".hand1 {\n  margin: 0 auto;\n  margin-top: 50px;\n  width: 50px;\n  height: 50px;\n  content: url(\"https://i.imgur.com/MzqxIK4.png\"); }\n\n.hand2 {\n  margin: 0 auto;\n  margin-top: 50px;\n  width: 50px;\n  height: 50px;\n  content: url(\"https://i.imgur.com/C6EXmSl.png\"); }\n\n.hand3 {\n  margin: 0 auto;\n  margin-top: 50px;\n  width: 50px;\n  height: 50px;\n  content: url(\"https://i.imgur.com/o1OlWwm.png\"); }\n\n.foot1 {\n  margin: 0 auto;\n  margin-top: 50px;\n  width: 50px;\n  height: 50px;\n  content: url(\"https://i.imgur.com/CmtJTtQ.png\"); }\n\n.content img {\n  width: 50px;\n  height: 50px; }\n\n#heading {\n  z-index: 1; }\n\n#sidebar {\n  z-index: 1; }\n\n.box {\n  border: lightgrey 1px solid;\n  margin: 0 auto;\n  width: 50px;\n  height: 50px; }\n", ""]);
 
 // exports
+
+
+/***/ }),
+/* 8 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["c"] = rotateOnClick;
+let gridSize = 50;
+const gridDrag = (ele) => {
+    ele.draggable({ grid: [ gridSize, gridSize ] })
+
+    .on("mouseover", function(){
+      $( this ).addClass("move-cursor")
+    })
+
+    .on("mousedown", function(){
+      $( this )
+        .removeClass("move-cursor")
+        .addClass("grab-cursor")
+        .addClass("opac");
+      if ($( this ).hasClass("route-hold")){
+        makeBox($( this ));
+      }
+
+    })
+
+    .on("mouseup", function(){
+      $( this )
+        .removeClass("grab-cursor")
+        .removeClass("opac")
+        .addClass("move-cursor");
+    });
+};
+/* harmony export (immutable) */ __webpack_exports__["a"] = gridDrag;
+
+
+
+
+const makeBox = (ele) => {
+  $( " .box " ).removeClass("box");
+  ele.addClass("box");
+};
+/* harmony export (immutable) */ __webpack_exports__["b"] = makeBox;
+
+
+function rotateOnClick(){
+  $('.rotate').click(()=>{
+    setRotate(5);
+    rotateEle();
+  });
+  $('.crotate').click(()=>{
+    setRotate(-5);
+    rotateEle();
+  });
+  $('.rotate').on("mousedown", ()=>{
+    setRotate(5);
+    rotateEle();
+  });
+  //end
+
+  // Rotate on hold
+  let interval;
+  $("#crotate")[0].addEventListener('mousedown', function(e) {
+    interval = setInterval(()=>{
+      setRotate(-5);
+      rotateEle();
+    }, 50);
+  });
+
+  $("#crotate ")[0].addEventListener('mouseup',function(e) {
+    clearInterval(interval);
+  });
+
+  $("#crotate")[0].addEventListener('mouseout',function(e) {
+    clearInterval(interval);
+  });
+  $("#rotate")[0].addEventListener('mousedown', function(e) {
+    interval = setInterval(() => {
+      setRotate(5);
+      rotateEle();
+    }, 50);
+  });
+
+  $("#rotate ")[0].addEventListener('mouseup',function(e) {
+    clearInterval(interval);
+  });
+
+  $("#rotate")[0].addEventListener('mouseout',function(e) {
+    clearInterval(interval);
+  });
+}
+
+function rotateEle(){
+  $(" .box ").rotate(parseInt( $(" .box ")[0].getAttribute("alt")));
+}
+function setRotate(deg){
+  $(" .box ")[0].setAttribute("alt",
+  `${parseInt($(" .box ")[0].getAttribute("alt")) + deg}`);
+}
+
+
+/***/ }),
+/* 9 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+
+class Hold {
+  constructor(id, htmlEle) {
+    this.id = id;
+    this.htmlEle = htmlEle;
+    this.rotation = 0;
+  }
+
+  
+}
+/* unused harmony export default */
+
 
 
 /***/ })

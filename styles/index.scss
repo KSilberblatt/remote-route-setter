@@ -6,13 +6,12 @@
   display: flex;
   flex-direction: row;
   height: 100%;
-  z-index: -1;
+
 }
 .heading{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  z-index: 1;
 }
 .heading img {
   height: 50px;
@@ -27,13 +26,13 @@
   background-position: 18px 11px;
   height: 80vh;
 
-}
 
+}
 .sidebar{
   flex: 1;
   color: green;
   background: black;
-  z-index: 1;
+
 }
 .sidebar img {
   height: 50px;
@@ -49,15 +48,14 @@
   color: green;
   margin: 0;
   padding: 20px 10px;
-}
-
-.box {
-  border: lightgrey 1px solid;
-  margin: 0 auto;
-  width: 50px;
-  height: 50px;
 
 }
+
+#page{
+  display: flex;
+  flex-direction: column;
+}
+
 
 .text {
   margin-top: 0;
