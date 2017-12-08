@@ -11,7 +11,7 @@ h2 {
   font-size: 20px
 }
 .content {
-  color: white;
+  color: black;
   display: flex;
   flex-direction: row;
   height: 89vh;
@@ -19,7 +19,7 @@ h2 {
 
 }
 .heading{
-  color: white;
+  color: black;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -46,7 +46,7 @@ h2 {
 .sidebar{
 
   flex: 1;
-  background: black;
+  background: lightgrey;
 
 }
 .sidebar img {
@@ -60,7 +60,7 @@ h2 {
 }
 
 .heading {
-  background: black;
+  background: lightgrey;
 
   margin: 0;
   padding: 20px 10px;
