@@ -1,4 +1,5 @@
 let gridSize = 50;
+let rotationSpeed = 5;
 export const gridDrag = (ele) => {
     ele.draggable({ grid: [ gridSize, gridSize ] })
 
@@ -35,15 +36,15 @@ export const makeBox = (ele) => {
 
 export function rotateOnClick(){
   $('.rotate').click(()=>{
-    setRotate(5);
+    setRotate(rotationSpeed);
     rotateEle();
   });
   $('.crotate').click(()=>{
-    setRotate(-5);
+    setRotate(-rotationSpeed);
     rotateEle();
   });
   $('.rotate').on("mousedown", ()=>{
-    setRotate(5);
+    setRotate(rotationSpeed);
     rotateEle();
   });
   //end
@@ -52,7 +53,7 @@ export function rotateOnClick(){
   let interval;
   $("#crotate")[0].addEventListener('mousedown', function(e) {
     interval = setInterval(()=>{
-      setRotate(-5);
+      setRotate(-rotationSpeed);
       rotateEle();
     }, 50);
   });
@@ -66,7 +67,7 @@ export function rotateOnClick(){
   });
   $("#rotate")[0].addEventListener('mousedown', function(e) {
     interval = setInterval(() => {
-      setRotate(5);
+      setRotate(rotationSpeed);
       rotateEle();
     }, 50);
   });
@@ -89,11 +90,11 @@ export function rotateOnClick(){
   $("body").keydown(function(e) {
     let ele = $(" .box ")[0];
   if(e.keyCode === 37) { // left
-    ele.setAttribute("alt", `${parseInt(ele.getAttribute("alt")) - 5}`);
+    ele.setAttribute("alt", `${parseInt(ele.getAttribute("alt")) - rotationSpeed}`);
     $(" .box ").rotate(parseInt(ele.getAttribute("alt")));
     }
   else if(e.keyCode === 39) { // right
-      ele.setAttribute("alt", `${parseInt(ele.getAttribute("alt")) + 5}`);
+      ele.setAttribute("alt", `${parseInt(ele.getAttribute("alt")) + rotationSpeed}`);
     $(" .box ").rotate(parseInt(ele.getAttribute("alt")));
     }
   });
